@@ -1,6 +1,7 @@
 import About from "./components/pages/About";
 import Layout from "./components/layout/Layout";
 import MainPage from "./components/pages/MainPage";
+import ProductListing from "./components/pages/ProductListing";
 
 const routes = [
     {
@@ -14,6 +15,10 @@ const routes = [
             {
                 path: "about",
                 element: <About />,
+            },
+            {
+                path: "shop",
+                element: <ProductListing />,
             },
         ]
     },
