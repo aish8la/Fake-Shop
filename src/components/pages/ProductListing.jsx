@@ -1,17 +1,35 @@
 import Product from "./Product";
-import img from "../../public/sample-image.png"
-
-const testProducts = [
-    {id: 1, title: "Shoes", price: 10.00, imageUrl: img},
-    {id: 2, title: "Glasses", price: 100.00, imageUrl: img},
-]
+import { useEffect, useState } from "react";
 
 function ProductListing() {
-    const products = testProducts;
+    const [loading, setLoading] = useState(true);
+    const [products, setProducts] = useState([]);
+    
+    useEffect(() => {
+        fetch("https://fakestoreapi.com/products")
+        .then(response => {
+            if(!response.ok) {
+                throw new Error(`Server Error ${response.status}`);
+            }
+            return response.json();
+        })
+        .then( data => { 
+            setProducts(data);
+        })
+        .catch(error => {
+            console.error("Fetch Failed:", error);
+        })
+        .finally(() => {
+            setLoading(false);
+        });
+    }, []);
 
     return (
         <div>
-            {products.map(product => <Product product={product}></Product>)}
+            {!loading ? 
+                products.map(product => <Product key={product.id} product={product}></Product>)
+                : "Loading Page" //TODO: add better handling load
+            }
         </div>
     )
 }
