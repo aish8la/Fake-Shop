@@ -6,7 +6,9 @@ function ProductListing() {
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
-        fetch("https://fakestoreapi.com/products")
+        const controller = new AbortController();
+        const signal = controller.signal;
+        fetch("https://fakestoreapi.com/products", {signal: signal})
         .then(response => {
             if(!response.ok) {
                 throw new Error(`Server Error ${response.status}`);
@@ -17,11 +19,16 @@ function ProductListing() {
             setProducts(data);
         })
         .catch(error => {
+            if(error.name === "AbortError") return
             console.error("Fetch Failed:", error);
         })
         .finally(() => {
             setLoading(false);
         });
+
+        return () => {
+            controller.abort();
+        }
     }, []);
 
     return (
