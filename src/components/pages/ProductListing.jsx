@@ -1,4 +1,4 @@
-import Product from "./Product";
+import Product from "../listItems/Product";
 import { useOutletContext } from "react-router-dom";
 
 function ProductListing() {
