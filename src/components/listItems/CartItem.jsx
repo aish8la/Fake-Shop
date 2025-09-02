@@ -1,14 +1,14 @@
-import { useState } from "react"
+import { useOutletContext } from "react-router-dom";
 
 function CartItem({item}) {
-    const [quantity, setQuantity] = useState(item.qty);
+    const {changeCart} = useOutletContext();
 
     return (
         <div>
             <img src={item.image}/>
             <p>{item.title}</p>
             <p>{item.price}</p>
-            <input type="number" value={quantity} onChange={(e) => setQuantity(e.target.value)}></input>
+            <input type="number" value={item.qty} onChange={(e) => changeCart(item.id, parseInt(e.target.value))}></input>
         </div>
     )
 }

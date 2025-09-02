@@ -46,12 +46,29 @@ function Layout() {
         });
     }
 
+    function changeCart(prodID, quantity) {
+        setCart(prev => {
+            let newCart = prev.map(item => {
+                if(item.id === prodID) {
+                    return {...item, qty: quantity}
+                } else {
+                    return item;
+                }
+            })
+            
+            if(quantity === 0) {
+                newCart = newCart.filter(item => item.id !== prodID);
+            }
+            return newCart;
+        });
+    }
+
     return (
         <>
             <Header />
             <main>
                 {loading ? "Now Loading" : //TODO: add better handling load
-                    <Outlet context={{products, cart, addToCart}}/>
+                    <Outlet context={{products, cart, addToCart, changeCart}}/>
                 }
             </main>
         </>
