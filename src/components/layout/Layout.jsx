@@ -65,7 +65,7 @@ function Layout() {
 
     return (
         <>
-            <Header />
+            <Header cartCount={cart.length}/>
             <main>
                 {loading ? "Now Loading" : //TODO: add better handling load
                     <Outlet context={{products, cart, addToCart, changeCart}}/>
