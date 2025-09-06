@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
+import CartIcon from "../icons/CartIcon";
 
 function Header({ cartCount }) {
 
@@ -12,7 +13,7 @@ function Header({ cartCount }) {
                     <NavLink to={"about"}>About</NavLink>
                     <NavLink to={"shop"}>Shop</NavLink>
                 </span>
-                <NavLink to={"cart"}>Cart<span>{cartCount}</span></NavLink>
+                <NavLink to={"cart"}><CartIcon cartCount={cartCount}/></NavLink>
             </nav>
         </header>
     )

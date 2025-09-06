@@ -1,0 +1,20 @@
+.cartBtn {
+    background-color: transparent;
+    color: var(--text);
+    border: none;
+    position: relative;
+}
+
+.countBadge {
+    position: absolute;
+    top: -10px;
+    right: -24px;
+    border-radius: 50%;
+    color: white;
+    background-color: var(--text);
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
