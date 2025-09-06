@@ -25,7 +25,7 @@ function Layout() {
             console.error("Fetch Failed:", error);
         })
         .finally(() => {
-            setLoading(false);
+            if(!controller.signal.aborted) setLoading(false);
         });
 
         return () => {

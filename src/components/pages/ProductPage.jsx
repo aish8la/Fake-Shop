@@ -6,7 +6,6 @@ function ProductPage() {
     const prodID = parseInt(params.prodID)
     const product = products.find(product => product.id === prodID);
 
-
     return (
         <div>
             <img src={product.image} alt="" />
