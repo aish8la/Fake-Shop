@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
+import ErrorPage from "../pages/ErrorPage";
 
 function Layout() {
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
     
@@ -22,7 +24,7 @@ function Layout() {
         })
         .catch(error => {
             if(error.name === "AbortError") return
-            console.error("Fetch Failed:", error);
+            setError(error);
         })
         .finally(() => {
             if(!controller.signal.aborted) setLoading(false);
@@ -32,6 +34,8 @@ function Layout() {
             controller.abort();
         }
     }, []);
+
+    if(error) return <ErrorPage error={error}/>;
 
     function addToCart(prodID) {
         const product = products.find(prod => prod.id === prodID);
