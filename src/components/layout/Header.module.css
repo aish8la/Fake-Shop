@@ -1,11 +1,13 @@
 .mainHeader {
     display: flex;
-    width: 90%;
-    max-width: 1080px;
     align-items: center;
     justify-content: space-between;
-    padding: var(--spacing4) 0;
+    max-width: 100vw;
+    padding: var(--spacing4) var(--spacing6);
     margin: 0 auto;
+    position: sticky;
+    top: 0px;
+    background-color: var(--bg-dark);
 }
 
 .navigation {
