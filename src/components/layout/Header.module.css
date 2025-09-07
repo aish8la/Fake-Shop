@@ -1,3 +1,9 @@
+:root {
+    --stripe-color-one: var(--accent-color);
+    --stripe-color-two: var(--bg);
+    --animation-duration: 20000ms;
+}
+
 .mainHeader {
     display: flex;
     align-items: center;
@@ -8,6 +14,7 @@
     position: sticky;
     top: 0px;
     background-color: var(--bg-dark);
+    overflow-x: hidden;
 }
 
 .navigation {
@@ -20,4 +27,26 @@
     display: flex;
     align-items: center;
     gap: var(--spacing5);
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    bottom: 0px;
+    height: 3px;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--stripe-color-one),
+        var(--stripe-color-one) 10px,
+        var(--stripe-color-two) 10px,
+        var(--stripe-color-two) 20px
+    );
+    width: 200%;
+    left: 0px;
+    animation: loop linear var(--animation-duration) infinite;
+}
+
+@keyframes loop {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
 }

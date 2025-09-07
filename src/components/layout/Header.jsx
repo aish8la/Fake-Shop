@@ -2,10 +2,10 @@ import { NavLink } from "react-router-dom";
 import styles from "./Header.module.css";
 import CartIcon from "../icons/CartIcon";
 
-function Header({ cartCount }) {
+function Header({ cartCount, loading }) {
 
     return (
-        <header className={styles.mainHeader}>
+        <header className={`${styles.mainHeader} ${loading ? styles.loading : ""}`}>
             <h1>Fake Shop</h1>
             <nav className={styles.navigation}>
                 <span className={styles.navItems}>
