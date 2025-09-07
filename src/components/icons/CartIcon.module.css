@@ -7,14 +7,42 @@
 
 .countBadge {
     position: absolute;
-    top: -10px;
-    right: -24px;
-    border-radius: 50%;
-    color: white;
-    background-color: var(--text);
-    width: 25px;
-    height: 25px;
+    top: calc(var(--spacing2) * (-1));
+    right: calc(var(--spacing3) * (-1));
+    color: var(--bg-light);
     display: flex;
     align-items: center;
     justify-content: center;
+    isolation: isolate;
+    z-index: 0;
+}
+
+.countBadge::before {
+    position: absolute;
+    content: '';
+    background-color: var(--accent-color);
+    width: 25px;
+    height: 25px;
+    z-index: -1;
+    border-radius: 50%;
+}
+
+@keyframes bump {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.20);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.countBadge.bump::before {
+    animation-name: bump;
+    animation-duration: 300ms;
+    animation-timing-function: ease-out;
 }
