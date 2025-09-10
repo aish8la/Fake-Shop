@@ -15,6 +15,7 @@
     top: 0px;
     background-color: var(--bg-dark);
     overflow-x: hidden;
+    z-index: 1;
 }
 
 .navigation {

@@ -1,0 +1,7 @@
+.listingContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(250px, 30%, 500px), 1fr));
+    gap: var(--spacing4);
+    padding: var(--spacing4) var(--spacing6)
+}
+
