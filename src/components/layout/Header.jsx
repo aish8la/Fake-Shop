@@ -10,7 +10,6 @@ function Header({ cartCount, loading }) {
             <nav className={styles.navigation}>
                 <span className={styles.navItems}>
                     <NavLink to={"/"}>Home</NavLink>
-                    <NavLink to={"about"}>About</NavLink>
                     <NavLink to={"shop"}>Shop</NavLink>
                 </span>
                 <NavLink to={"cart"}><CartIcon cartCount={cartCount}/></NavLink>
