@@ -1,4 +1,4 @@
-import CartItem from "../listItems/CartItem";
+import CartItem from "../widgets/CartItem";
 import { useOutletContext } from "react-router-dom";
 
 function CartPage() {

@@ -1,4 +1,4 @@
-import Product from "../listItems/Product";
+import Product from "../widgets/Product";
 import { useOutletContext } from "react-router-dom";
 import styles from "./ProductListing.module.css";
 
