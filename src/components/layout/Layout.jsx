@@ -37,15 +37,15 @@ function Layout() {
 
     if(error) return <ErrorPage error={error}/>;
 
-    function addToCart(prodID) {
+    function addToCart(prodID, addQty) {
         const product = products.find(prod => prod.id === prodID);
         setCart(prev => {
             const exists = prev.some(item => item.id === prodID);
 
             if(exists) {
-                return prev.map(item => item.id === prodID ? {...item, qty: item.qty + 1} : item);
+                return prev.map(item => item.id === prodID ? {...item, qty: item.qty + addQty} : item);
             } else {
-                return [...prev, {...product, qty: 1}];
+                return [...prev, {...product, qty: addQty}];
             }
         });
     }

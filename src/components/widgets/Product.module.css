@@ -5,6 +5,9 @@
     transition: all 300ms ease-in-out;
     box-shadow: 0px 4px 4px #00000030;
     will-change: transform;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing3);
 }
 
 .productCard:hover {
@@ -32,6 +35,7 @@
     font: var(--p);
     font-weight: 600;
     transition: all 300ms ease-in;
+    align-self: center;
 }
 
 .addButton:hover {
@@ -39,4 +43,8 @@
     border-radius: 30px;
     background-color: var(--accent-color);
     color: var(--bg-light);
+}
+
+.price {
+    margin-top: auto;
 }
