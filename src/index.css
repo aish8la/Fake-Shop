@@ -30,6 +30,10 @@
     --spacing5: 40px;
     --spacing6: 80px;
     --spacing7: 160px;
+
+    --border-radius1: 10px;
+    --border-radius2: 30px;
+    --full-circle: 50%;
 }
 
 * {

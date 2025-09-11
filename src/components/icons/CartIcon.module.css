@@ -24,7 +24,7 @@
     width: 25px;
     height: 25px;
     z-index: -1;
-    border-radius: 50%;
+    border-radius: var(--full-circle);
 }
 
 @keyframes bump {
