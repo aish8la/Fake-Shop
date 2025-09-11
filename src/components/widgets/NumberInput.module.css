@@ -1,12 +1,16 @@
 .numberInput {
     border: 2px solid var(--accent-color);
     padding: var(--spacing2) var(--spacing2);
-    border-radius: 10px;
     background-color: var(--bg-light);
     display: flex;
     align-items: center;
     gap: var(--spacing3);
     align-self: center;
+    transition: all 300ms ease-in-out;
+}
+
+.numberInput:hover {
+    border-radius: 30px;
 }
 
 .numberInput > button {
