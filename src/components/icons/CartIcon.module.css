@@ -3,6 +3,18 @@
     color: var(--text);
     border: none;
     position: relative;
+
+    transition: all 300ms ease-in-out;
+    &:hover {
+        cursor: pointer;
+        color: var(--accent-color);
+    }
+}
+
+.cartIcon {
+    width: 2em;
+    height: auto;
+    aspect-ratio: 1;
 }
 
 .countBadge {
@@ -21,8 +33,9 @@
     position: absolute;
     content: '';
     background-color: var(--accent-color);
-    width: 25px;
-    height: 25px;
+    width: 2em;
+    height: auto;
+    aspect-ratio: 1;
     z-index: -1;
     border-radius: var(--full-circle);
 }

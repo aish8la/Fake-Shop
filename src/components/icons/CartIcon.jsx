@@ -17,7 +17,7 @@ function CartIcon({ cartCount }) {
 
     return (
         <button className={styles.cartBtn}>
-            <ShoppingCart />
+            <ShoppingCart className={styles.cartIcon} />
             <span onAnimationEnd={() => setAnimate(false)} className={`${styles.countBadge} ${animate ? styles.bump : ""}`}>{cartCount}</span>
         </button>
     )
