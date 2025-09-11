@@ -1,30 +1,35 @@
 .productCard {
     padding: var(--spacing3);
-    background-color: var(--bg);
     text-align: center;
     transition: all 300ms ease-in-out;
-    box-shadow: 0px 4px 4px #00000030;
-    will-change: transform;
     display: flex;
     flex-direction: column;
     gap: var(--spacing3);
+    border: 2px solid var(--bg);
+    will-change: transform;
 }
 
 .productCard:hover {
-    transform: scale(1.03);
-    box-shadow: 0px 12px 12px #00000015;
+    border: 2px solid var(--accent-color);
+    border-radius: var(--border-radius2);
+    transform: scale(1.02);
 }
 
 .imageContainer {
-    width: 100%;
+    width: 80%;
     height: auto;
     margin: auto;
     aspect-ratio: 4/3;
+    background-color: var(--bg);
+    border-radius: var(--border-radius2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .imageContainer img {
-    width: 100%;
-    height: 100%;
+    width: 90%;
+    height: 90%;
     object-fit: contain;
 }
 
@@ -40,7 +45,7 @@
 
 .addButton:hover {
     cursor: pointer;
-    border-radius: 30px;
+    border-radius: var(--border-radius2);
     background-color: var(--accent-color);
     color: var(--bg-light);
 }
