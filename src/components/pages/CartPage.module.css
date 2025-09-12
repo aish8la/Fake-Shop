@@ -1,0 +1,5 @@
+.cartPage {
+    padding: var(--spacing4) var(--spacing6);
+    display: flex;
+    flex-direction: row;
+}
