@@ -1,6 +1,7 @@
 import { useOutletContext } from "react-router-dom";
 import styles from "./CartItem.module.css";
-import NumberInput from "./NumberInput"
+import NumberInput from "./NumberInput";
+import { currencyFormatter } from "../../util";
 
 function CartItem({item}) {
     const {changeCart} = useOutletContext();
@@ -12,7 +13,7 @@ function CartItem({item}) {
             </div>
             <div className={styles.titleContainer}>
                 <p className={styles.title}>{item.title}</p>
-                <p>{item.price}</p>
+                <p>{currencyFormatter.format(item.price)}</p>
             </div>
             <div className={styles.buttonContainer}>
                 <NumberInput number={item.qty} setNumber={(qty) => changeCart(item.id, qty)}/>

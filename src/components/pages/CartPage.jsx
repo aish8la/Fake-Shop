@@ -1,6 +1,7 @@
 import CartItem from "../widgets/CartItem";
 import { useOutletContext } from "react-router-dom";
 import styles from "./CartPage.module.css";
+import { currencyFormatter } from "../../util";
 
 function CartPage() {
     const {cart} = useOutletContext();
@@ -17,7 +18,7 @@ function CartPage() {
             <div className={styles.totalContainer}>
                 <dl>
                     <dt>Total</dt>
-                    <dd>{cartTotal}</dd>
+                    <dd>{currencyFormatter.format(cartTotal)}</dd>
                 </dl>
             </div>
         </div>
