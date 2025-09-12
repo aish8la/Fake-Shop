@@ -33,6 +33,13 @@
     object-fit: contain;
 }
 
+.buttonContainer {
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing3);
+}
+
 .addButton {
     border: none;
     background-color: var(--bg-dark);

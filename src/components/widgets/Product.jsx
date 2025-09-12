@@ -17,8 +17,10 @@ function Product({ product }) {
                 <p>{product.title}</p>
             </Link>
             <p className={styles.price}>{product.price}</p>
-            <NumberInput number={number} setNumber={setNumber}/>
-            <button className={styles.addButton} onClick={() => addToCart(product.id, number)}>Add to Cart</button>
+            <div className={styles.buttonContainer}>
+                <NumberInput number={number} setNumber={setNumber}/>
+                <button className={styles.addButton} onClick={() => addToCart(product.id, number)}>Add to Cart</button>
+            </div>
         </li>
     )
 }
