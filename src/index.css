@@ -20,6 +20,7 @@
     --ff: "Roboto", serif;
 
     --p: 1rem/1.5em var(--ff);
+    --bold-p: 600 var(--p);
     --bold-p2: 600 1.2rem/1.5em var(--ff);
 
     --h1: 600 3rem/1.2em var(--ff);

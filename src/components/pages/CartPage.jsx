@@ -14,7 +14,7 @@ function CartPage() {
             <ul className={styles.cartItemContainer}>
                 {cart.map(item => <CartItem key={item.id} item={item}></CartItem>)}
             </ul>
-            <div>
+            <div className={styles.totalContainer}>
                 <dl>
                     <dt>Total</dt>
                     <dd>{cartTotal}</dd>
