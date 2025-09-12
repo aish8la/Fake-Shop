@@ -6,9 +6,9 @@ function ProductListing() {
     const {products} = useOutletContext();
 
     return (
-        <div className={styles.listingContainer}>
+        <ul className={styles.listingContainer}>
             {products.map(product => <Product key={product.id} product={product}></Product>)}
-        </div>
+        </ul>
     )
 }
 

@@ -8,7 +8,7 @@ function Product({ product }) {
     const [number, setNumber] = useState(Number(1));
 
     return (
-        <div className={styles.productCard}>
+        <li className={`${styles.productCard} reset-list`}>
             <Link to={`/product/${product.id}`}>
                 <div className={styles.imageContainer}>
                     <img src={product.image}></img>
@@ -19,7 +19,7 @@ function Product({ product }) {
             <p className={styles.price}>{product.price}</p>
             <NumberInput number={number} setNumber={setNumber}/>
             <button className={styles.addButton} onClick={() => addToCart(product.id, number)}>Add to Cart</button>
-        </div>
+        </li>
     )
 }
 
