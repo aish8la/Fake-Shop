@@ -19,7 +19,11 @@ function ProductPage() {
                 <p className={styles.title}>{product.title}</p>
                 <p className={styles.price}>{product.price}</p>
                 <NumberInput number={quantity} setNumber={setQuantity} />
-                <button onClick={() => addToCart(prodID, quantity)}>Add to Cart</button>
+                <button className={styles.addButton} onClick={() => addToCart(prodID, quantity)}>Add to Cart</button>
+                <div className={styles.description}>
+                    <hr />
+                    <p>{product.description}</p>
+                </div>
             </div>
         </div>
     )
