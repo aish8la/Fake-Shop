@@ -1,4 +1,41 @@
 .heroImage {
     max-width: 100%;
-    object-fit: contain;
+    object-fit: cover;
+    display: block;
+}
+
+.hero {
+    position: relative;
+}
+
+.overlay {
+    padding: var(--spacing4) var(--spacing6);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    background-color: hsla(var(--hue), 50%, 80%, 0.3);
+    z-index: 1;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 300s ease-in;
+}
+
+.overlay > a {
+    border: none;
+    background-color: var(--accent-color);
+    padding: var(--spacing3) var(--spacing4);
+    color: var(--bg-light);
+    font: var(--p);
+    font-weight: 600;
+    transition: all 300ms ease-in;
+
+    &:hover {
+        cursor: pointer;
+        border-radius: var(--border-radius2);
+        background-color: var(--tertiary-color);
+        color: var(--bg-light);
+    }
 }
