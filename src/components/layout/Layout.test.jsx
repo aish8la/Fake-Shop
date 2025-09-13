@@ -1,9 +1,10 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, waitForElementToBeRemoved } from "@testing-library/react";
+import { describe, it, expect, vi, afterEach } from "vitest";
+import { render, screen, waitForElementToBeRemoved, within } from "@testing-library/react";
 import Layout from "./Layout";
 import { createMemoryRouter, RouterProvider, useOutletContext } from "react-router-dom";
+import userEvent from "@testing-library/user-event";
 
-
+afterEach(() => vi.resetAllMocks());
 
 function renderRoute(mockOutletChild) {
     const routes = [
@@ -28,6 +29,26 @@ function renderRoute(mockOutletChild) {
 function ChildStringedData() {
     const context = useOutletContext();
     return <pre data-testid="context" >{JSON.stringify(context)}</pre>
+}
+
+let addQty = 0;
+let changeQty = 0;
+function ProductListingChild() {
+    const context = useOutletContext();
+    return (
+        <>
+            <div data-testid="add-to-cart">
+                {context.products.map(prods => <button onClick={() => context.addToCart(prods.id, addQty)}>{prods.title}</button>)}
+            </div>
+            <div data-testid="change-cart">
+                {context.products.map(prods => <button onClick={() => context.changeCart(prods.id, changeQty)}>{prods.title}</button>)}
+            </div>
+            <pre data-testid="cart-object">
+                {JSON.stringify(context.cart)}
+            </pre >
+        </>
+
+    )
 }
 
 const product = [
@@ -97,5 +118,112 @@ describe("Layout component data fetching", () => {
         await waitForElementToBeRemoved(() => screen.getByText(/Now Loading/i));
         expect(screen.getByText(/Oops/i)).toBeInTheDocument();
         expect(screen.getByText(/Fetch failed/i)).toBeInTheDocument();
+    });
+});
+
+
+describe("Handles Cart data", () => {
+
+    const childComponent = <ProductListingChild />;
+
+    it("Child can access cart", async () => {
+        window.fetch = vi.fn().mockResolvedValueOnce(
+            {
+                ok: true,
+                json: () => Promise.resolve(product)
+            }
+        );
+
+        renderRoute(childComponent);
+
+        await waitForElementToBeRemoved(() => screen.getByText(/Now Loading/i));
+        
+        const buttonContainer = within(screen.getByTestId("add-to-cart"));
+        expect(buttonContainer.getByText(/foo/i)).toBeInTheDocument();
+
+        const cart = JSON.parse((screen.getByTestId("cart-object")).textContent);
+        expect(cart.cartItems).toBeDefined();
+    });
+
+    it("Child can change cart using function passed down", async () => {
+        window.fetch = vi.fn().mockResolvedValueOnce(
+            {
+                ok: true,
+                json: () => Promise.resolve(product)
+            }
+        );
+
+        const user = userEvent.setup();
+        renderRoute(childComponent);
+
+        await waitForElementToBeRemoved(() => screen.getByText(/Now Loading/i));
+        const cartElement = screen.getByTestId("cart-object");
+        let cart = JSON.parse(cartElement.textContent);
+        expect(cart.cartItems.length).toBe(0);
+
+        const addBtnCtn = within(screen.getByTestId("add-to-cart"));
+        const changeBtnCtn = within(screen.getByTestId("change-cart"));
+
+        addQty = 5;
+        await user.click(addBtnCtn.getByText(/foo/i));
+
+        cart = JSON.parse(cartElement.textContent);
+        
+        expect(cart.cartItems.length).toBe(1);
+        expect(cart.cartItems[0].title).toBe("foo");
+        expect(cart.cartCount).toBe(5);
+
+        changeQty = 0;
+
+        await user.click(changeBtnCtn.getByText(/foo/i));
+
+        cart = JSON.parse(cartElement.textContent);
+        expect(cart.cartItems.length).toBe(0);
+        expect(cart.cartCount).toBe(0);
+
+    });
+
+    it("Child can cause header icon to change", async () => {
+        window.fetch = vi.fn().mockResolvedValueOnce(
+            {
+                ok: true,
+                json: () => Promise.resolve(product)
+            }
+        );
+
+        const user = userEvent.setup();
+        renderRoute(childComponent);
+
+        await waitForElementToBeRemoved(() => screen.getByText(/Now Loading/i));
+
+        const cartIconCount = screen.getByTestId("cart-icon-count");
+        expect(cartIconCount.textContent).toBe("0");
+   
+
+        const addBtnCtn = within(screen.getByTestId("add-to-cart"));
+        const changeBtnCtn = within(screen.getByTestId("change-cart"));
+
+        addQty = 5;
+        await user.click(addBtnCtn.getByText(/foo/i));
+
+        expect(cartIconCount.textContent).toBe("5");
+
+        changeQty = 0;
+
+        await user.click(changeBtnCtn.getByText(/foo/i));
+        expect(cartIconCount.textContent).toBe("0");
+
+        addQty = 3;
+        await user.click(addBtnCtn.getByText(/bar/i));
+
+        changeQty = 1;
+
+        await user.click(changeBtnCtn.getByText(/bar/i));
+
+        addQty = 5;
+        await user.click(addBtnCtn.getByText(/baz/i));
+
+        expect(cartIconCount.textContent).toBe("6");
+
     });
 });
