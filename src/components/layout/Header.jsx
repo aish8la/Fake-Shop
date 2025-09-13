@@ -6,7 +6,6 @@ function Header({ cartCount, loading }) {
 
     return (
         <header className={`${styles.mainHeader} ${loading ? styles.loading : ""}`}>
-            <h1>Fake Shop</h1>
             <nav className={styles.navigation}>
                 <span className={styles.navItems}>
                     <NavLink to={"/"}>Home</NavLink>

@@ -7,7 +7,7 @@
 .mainHeader {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     max-width: 100vw;
     padding: var(--spacing4) var(--spacing6);
     margin: 0 auto;
