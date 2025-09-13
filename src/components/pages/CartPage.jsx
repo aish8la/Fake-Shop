@@ -5,7 +5,7 @@ import { currencyFormatter } from "../../util";
 
 function CartPage() {
     const {cart} = useOutletContext();
-    const cartTotal = cart.reduce((total, current) => {
+    const cartTotal = cart.cartItems.reduce((total, current) => {
         const itemPrice = parseInt(current.qty) * parseFloat(current.price);
         return total + itemPrice;
     }, 0)
@@ -13,7 +13,7 @@ function CartPage() {
     return (
         <div className={styles.cartPage}>
             <ul className={styles.cartItemContainer}>
-                {cart.map(item => <CartItem key={item.id} item={item}></CartItem>)}
+                {cart.cartItems.map(item => <CartItem key={item.id} item={item}></CartItem>)}
             </ul>
             <div className={styles.totalContainer}>
                 <dl>

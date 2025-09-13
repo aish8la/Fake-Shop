@@ -7,7 +7,7 @@ function Layout() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [products, setProducts] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState({cartItems: [], cartCount: 0});
     
     useEffect(() => {
         const controller = new AbortController();
@@ -40,19 +40,21 @@ function Layout() {
     function addToCart(prodID, addQty) {
         const product = products.find(prod => prod.id === prodID);
         setCart(prev => {
-            const exists = prev.some(item => item.id === prodID);
-
+            const exists = prev.cartItems.some(item => item.id === prodID);
+            let newCart;
             if(exists) {
-                return prev.map(item => item.id === prodID ? {...item, qty: item.qty + addQty} : item);
+                newCart = prev.cartItems.map(item => item.id === prodID ? {...item, qty: item.qty + addQty} : item);
             } else {
-                return [...prev, {...product, qty: addQty}];
+                newCart = [...prev.cartItems, {...product, qty: addQty}];
             }
+
+            return {cartItems: newCart, cartCount: countCart(newCart)};
         });
     }
 
     function changeCart(prodID, quantity) {
         setCart(prev => {
-            let newCart = prev.map(item => {
+            let newCart = prev.cartItems.map(item => {
                 if(item.id === prodID) {
                     return {...item, qty: quantity}
                 } else {
@@ -63,13 +65,19 @@ function Layout() {
             if(quantity === 0) {
                 newCart = newCart.filter(item => item.id !== prodID);
             }
-            return newCart;
+            return {cartItems: newCart, cartCount: countCart(newCart)};
         });
+    }
+
+    function countCart(newCart) {
+        return newCart.reduce((total, item) => {
+            return total += item.qty;
+        }, 0)
     }
 
     return (
         <>
-            <Header cartCount={cart.length} loading={loading}/>
+            <Header cartCount={cart.cartCount} loading={loading}/>
             <main>
                 {loading ? "Now Loading" : //TODO: add better handling load
                     <Outlet context={{products, cart, addToCart, changeCart}}/>
